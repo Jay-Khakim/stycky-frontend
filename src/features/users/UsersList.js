@@ -10,7 +10,7 @@ const UsersList = () => {
 		isError, 
 		error 
 	} = useGetUsersQuery()
-
+	// console.log(users)
 	let content
 
 	if (isLoading) content = <p>Loading ... </p>
@@ -41,7 +41,8 @@ const UsersList = () => {
             </table>
         )
 	}
-	return <h1>UsersList</h1>;
+	return content;
+
 };
 
 export default UsersList;
