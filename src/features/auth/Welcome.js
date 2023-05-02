@@ -1,28 +1,44 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Welcome = () => {
-    const date = new Date()
-    const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(date)
+	const { username, isManager, isAdmin } = useAuth();
 
-    const content = (
-        <section className="welcome">
+	const date = new Date();
+	const today = new Intl.DateTimeFormat("en-US", {
+		dateStyle: "full",
+		timeStyle: "long",
+	}).format(date);
 
-            <p>{today}</p>
+	const content = (
+		<section className="welcome">
+			<p>{today}</p>
 
-            <h1>Welcome!</h1>
+			<h1>Welcome {username}! </h1>
 
-            <p><Link to="/dash/notes">View techNotes</Link></p>
+			<p>
+				<Link to="/dash/notes">View techNotes</Link>
+			</p>
 
-            <p><Link to="/dash/notes/new">Add New rechNote</Link></p>
+			<p>
+				<Link to="/dash/notes/new">Add New rechNote</Link>
+			</p>
 
-            <p><Link to="/dash/users">View user Setting</Link></p>
+			{(isManager || isAdmin) && (
+				<p>
+					<Link to="/dash/users">View user Setting</Link>
+				</p>
+			)}
 
-            <p><Link to="/dash/users/new">Add New User </Link></p>
+			{(isManager || isAdmin) && (
+				<p>
+					<Link to="/dash/users/new">Add New User </Link>
+				</p>
+			)}
+		</section>
+	);
 
-        </section>
-    )
+	return content;
+};
 
-    return content 
-}
-
-export default Welcome
+export default Welcome;

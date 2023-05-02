@@ -1,34 +1,33 @@
-import { useGetUsersQuery } from "./usersApiSlice";
+import { useGetUsersQuery } from "./usersApiSlice"
 import User from './User'
 
 const UsersList = () => {
 
-	const {
-		data: users,
-		isLoading,
-		isSuccess,
-		isError, 
-		error 
-	} = useGetUsersQuery('usersList', {
-		pollingInterval: 60000,
-		refetchOnFocus: true,
-		refetchOnMountOrArgChange: true
-	})
-	// console.log(users)
-	let content
+    const {
+        data: users,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetUsersQuery('usersList', {
+        pollingInterval: 60000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
 
-	if (isLoading) content = <p>Loading ... </p>
+    let content
 
-	if(isError) {
-		content = <p className="errmsg">{error?.data?.message}</p>
-	}
+    if (isLoading) content = <p>Loading...</p>
 
-	if(isSuccess){
-		const { ids } = users
+    if (isError) {
+        content = <p className="errmsg">{error?.data?.message}</p>
+    }
 
-        const tableContent = ids?.length
-            ? ids.map(userId => <User key={userId} userId={userId} />)
-            : null
+    if (isSuccess) {
+
+        const { ids } = users
+
+        const tableContent = ids?.length && ids.map(userId => <User key={userId} userId={userId} />)
 
         content = (
             <table className="table table--users">
@@ -44,9 +43,8 @@ const UsersList = () => {
                 </tbody>
             </table>
         )
-	}
-	return content;
+    }
 
-};
-
-export default UsersList;
+    return content
+}
+export default UsersList
