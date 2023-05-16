@@ -19,4 +19,4 @@
 17. [x] Managers and Admins can view, edit, and delete all notes 
 18. [x] Only Managers and Admins can access User Settings 
 19. [x] Only Managers and Admins can create new users 
-20. [ ] Desktop mode is most important but should be available in mobile 
+20. [x] Desktop mode is most important but should be available in mobile 
